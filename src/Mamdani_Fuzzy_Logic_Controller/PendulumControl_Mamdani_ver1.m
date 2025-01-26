@@ -1,15 +1,9 @@
-%% Fuzzy Logic creation
-
-% Data to execute simulation on model 
-% /comment if unnecessary
-%load 'exp_data_RP.mat'
-%fi_pend0 = deg2rad(30); % Initialize pendulum swing (0 -> at the equilibrium point)
-
+% Fuzzy Logic creation
 %% Ranges for variables
 
 % Define ranges for variables 
-pend_angle_max = pi;
-pend_angle_min = -pi;
+pend_angle_max = 3.14159;
+pend_angle_min = -3.14159;
 pend_vel_max = 10;
 pend_vel_min = -10;
 rotor_vel_max = 450;
@@ -47,13 +41,12 @@ fisMam_ver1 = addMF(fisMam_ver1,"pend_angle","trimf",[0.01 0.5 3.14159], ...
     Name="Right",VariableType="input");
 
 % Pendulum Velocity
-fisMam_ver1 = addMF(fisMam_ver1,"pend_vel","trimf",[0.01 5 10], ...
-    Name="Right",VariableType="input");
 fisMam_ver1 = addMF(fisMam_ver1,"pend_vel","trimf",[-10 -5 -0.01], ...
     Name="Left",VariableType="input");
 fisMam_ver1 = addMF(fisMam_ver1,"pend_vel","trimf",[-0.02 0 0.02], ...
     Name="Zero",VariableType="input");
-
+fisMam_ver1 = addMF(fisMam_ver1,"pend_vel","trimf",[0.01 5 10], ...
+    Name="Right",VariableType="input");
 % Rotor Velocity
 fisMam_ver1 = addMF(fisMam_ver1,"rotor_vel","trimf",[-450 -130 -5], ...
     Name="Negative",VariableType="input");
@@ -101,9 +94,7 @@ ruleList = [
     3 2 3 3 1 1; ...
     1 3 3 1 1 1; ...
     2 3 3 3 1 1; ...
-    3 3 3 3 1 1; ...
-    1 0 2 1 1 1; ...
-    3 0 2 3 1 1; ...
+    3 3 3 3 1 1
     ];
 
 % Add rules to FIS
@@ -138,3 +129,110 @@ gensurf(fisMam_ver1, [1, 3], 1)
 % For Pendulum Position and DC Velocity vs Control Signal
 subplot(3,1,3)
 gensurf(fisMam_ver1, [2, 3], 1)
+
+%% Setup simulation
+
+% Data to execute simulation on model 
+load 'exp_data_RP.mat'
+fi_pend0 = deg2rad(30); % Initialize pendulum swing (0 -> at the equilibrium point)
+Control_Gain = 1.55; % Setup control gain multiplication
+
+% Block Path
+blockPath = 'ReactionPendulum_Simulation_Model/Mamdani';
+blockPath2 = 'ReactionPendulum_Simulation_Model/ControlGain';
+
+% Set Param
+set_param(blockPath, 'fis', 'fisMam_ver1');
+set_param(blockPath2, 'Gain', 'Control_Gain');
+
+% Simulation Time
+T_final = 18;
+
+% Execute Simulation
+simOut = sim('ReactionPendulum_Simulation_Model');
+
+% Extract variables and save to .mat file
+save('firstFuzzy.mat', 'PendPosLQR', 'PendPosMam', ...
+                       'PendVelLQR', 'PendVelMam', ...
+                       'dcVelLQR', 'dcVelMam', ...
+                       'ControlLQR', 'ControlMam')
+
+%% Plot the results
+
+figure()
+subplot(4,1,1)
+plot(PendPosLQR.time,PendPosLQR.signals.values)
+hold on
+x_value = 3.472; 
+xline(x_value, 'r', 'LineWidth', 2); 
+hold on
+plot(PendPosMam.time,PendPosMam.signals.values, 'g')
+hold on
+x_value = 16.5291; 
+xline(x_value, 'm', 'LineWidth', 2); 
+hold off
+legend('Pendulum Angle - LQR', 'Equilibrium Point - LQR', 'Pendulum Angle - Fuzzy', ...
+    'Equilibrium Point - Fuzzy', 'Interpreter', 'latex', 'FontSize', 9);
+title('Regulation of Pendulum Angle - Comparison', 'Interpreter', 'latex', 'FontSize', 16);
+xlabel('Time [s]', 'Interpreter', 'latex', 'FontSize', 16);
+ylabel('Value [rad]', 'Interpreter', 'latex', 'FontSize', 16);
+grid on
+ax = gca; 
+ax.FontSize = 12; 
+subplot(4,1,2)
+plot(PendVelLQR.time,PendVelLQR.signals.values)
+hold on
+x_value = 3.472; 
+xline(x_value, 'r', 'LineWidth', 2); 
+hold on
+plot(PendVelMam.time,PendVelMam.signals.values, 'g')
+hold on
+x_value = 16.5291; 
+xline(x_value, 'm', 'LineWidth', 2); 
+hold off
+legend('Pendulum Velocity - LQR', 'Equilibrium Point - LQR', 'Pendulum Velocity - Fuzzy', ...
+    'Equilibrium Point - Fuzzy', 'Interpreter', 'latex', 'FontSize', 9);
+title('Regulation of Pendulum Velocity - Comparison', 'Interpreter', 'latex', 'FontSize', 16);
+xlabel('Time [s]', 'Interpreter', 'latex', 'FontSize', 16);
+ylabel('Value [rad/s]', 'Interpreter', 'latex', 'FontSize', 16);
+grid on
+ax = gca; 
+ax.FontSize = 12; 
+subplot(4,1,3)
+plot(dcVelLQR.time,dcVelLQR.signals.values)
+hold on
+x_value = 3.472; 
+xline(x_value, 'r', 'LineWidth', 2); 
+hold on
+plot(dcVelMam.time,dcVelMam.signals.values, 'g')
+hold on
+x_value = 16.5291; 
+xline(x_value, 'm', 'LineWidth', 2); 
+hold off
+legend('Rotor Velocity - LQR', 'Equilibrium Point - LQR', 'Rotor Velocity - Fuzzy', ...
+    'Equilibrium Point - Fuzzy', 'Interpreter', 'latex', 'FontSize', 9);
+title('Regulation of Rotor Velocity - Comparison', 'Interpreter', 'latex', 'FontSize', 16);
+xlabel('Time [s]', 'Interpreter', 'latex', 'FontSize', 16);
+ylabel('Value [rad/s]', 'Interpreter', 'latex', 'FontSize', 16);
+grid on
+ax = gca; 
+ax.FontSize = 12; 
+subplot(4,1,4)
+plot(ControlLQR.time,ControlLQR.signals.values)
+hold on
+x_value = 3.472; 
+xline(x_value, 'r', 'LineWidth', 2); 
+hold on
+plot(ControlMam.time,ControlMam.signals.values, 'g')
+hold on
+x_value = 16.5291;  
+xline(x_value, 'm', 'LineWidth', 2); 
+hold off
+legend('Control Signal - LQR', 'Equilibrium Point - LQR', 'Control Signal - Fuzzy', ...
+    'Equilibrium Point - Fuzzy', 'Interpreter', 'latex', 'FontSize', 9);
+title('Control Signal for Pendulum - Comparison', 'Interpreter', 'latex', 'FontSize', 16);
+xlabel('Time [s]', 'Interpreter', 'latex', 'FontSize', 16);
+ylabel('Value', 'Interpreter', 'latex', 'FontSize', 16);
+grid on
+ax = gca; 
+ax.FontSize = 12; 
