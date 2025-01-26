@@ -1,9 +1,4 @@
-%% Fuzzy Logic creation
-
-% Data to execute simulation on model 
-% /comment if unnecessary
-%load 'exp_data_RP.mat'
-%fi_pend0 = deg2rad(30); % Initialize pendulum swing (0 -> at the equilibrium point)
+% Fuzzy Logic creation
 
 %% Ranges for variables
 
