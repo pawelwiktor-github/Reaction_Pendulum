@@ -87,7 +87,7 @@ fisTS_ver2 = addRule(fisTS_ver2, ruleList);
 % Plot the FIS structure
 figure;
 plotfis(fisTS_ver2);
-title('Mamdani FIS Structure');
+title('Takagi-Sugeno FIS Structure');
 
 % Plot Membership functions
 figure()
