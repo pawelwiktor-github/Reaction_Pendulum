@@ -18,8 +18,8 @@ control_min = -1;
 fisMam_ver2 = mamfis('Name', 'PendulumControlver2', ...
                             AndMethod="min", ... 
                             OrMethod="max", ...
-                            ImplicationMethod="min", ...
-                            AggregationMethod="max", ...
+                            ImplicationMethod="prod", ...
+                            AggregationMethod="sum", ...
                             DefuzzificationMethod="centroid");
 
 % Inputs
@@ -170,7 +170,7 @@ xline(x_value, 'r', 'LineWidth', 2);
 hold on
 plot(PendPosMam.time,PendPosMam.signals.values, 'g')
 hold on
-x_value = 5.066; 
+x_value = 5.473; 
 xline(x_value, 'm', 'LineWidth', 2); 
 hold off
 legend('Pendulum Angle - LQR', 'Equilibrium Point - LQR', 'Pendulum Angle - Fuzzy', ...
@@ -189,7 +189,7 @@ xline(x_value, 'r', 'LineWidth', 2);
 hold on
 plot(PendVelMam.time,PendVelMam.signals.values, 'g')
 hold on
-x_value = 5.066;
+x_value = 5.473; 
 xline(x_value, 'm', 'LineWidth', 2); 
 hold off
 legend('Pendulum Velocity - LQR', 'Equilibrium Point - LQR', 'Pendulum Velocity - Fuzzy', ...
@@ -208,7 +208,7 @@ xline(x_value, 'r', 'LineWidth', 2);
 hold on
 plot(dcVelMam.time,dcVelMam.signals.values, 'g')
 hold on
-x_value = 5.066;
+x_value = 5.473; 
 xline(x_value, 'm', 'LineWidth', 2); 
 hold off
 legend('Rotor Velocity - LQR', 'Equilibrium Point - LQR', 'Rotor Velocity - Fuzzy', ...
@@ -227,7 +227,7 @@ xline(x_value, 'r', 'LineWidth', 2);
 hold on
 plot(ControlMam.time,ControlMam.signals.values, 'g')
 hold on
-x_value = 5.066; 
+x_value = 5.473; 
 xline(x_value, 'm', 'LineWidth', 2); 
 hold off
 legend('Control Signal - LQR', 'Equilibrium Point - LQR', 'Control Signal - Fuzzy', ...
