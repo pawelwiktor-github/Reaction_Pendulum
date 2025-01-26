@@ -9,7 +9,7 @@ files = {'repeating_sequence_02.mat', ...            % angle swings disturbance
 square_error_quality = zeros(length(files), 1);     % Integer of the square of the control
 time_weighted_quality = zeros(length(files), 1);    % Integer of absolute value of control * time
     
-ts = [1.81574 1.81779 2.10758];
+ts = [1.94279 1.98433 2.09972];
 
 % Looping through files
 for i = 1:length(files)
@@ -73,6 +73,6 @@ for i = 1:length(files)
     fprintf('  Integer of control square (J1): %.4f\n', square_error_quality(i));
     fprintf('  Integer of control absolute value * time (J2): %.4f\n\n', time_weighted_quality(i));
 end
-fprintf('  Regulation time (1): %.5f\n', 1.81574);
-fprintf('  Regulation time (2): %.5f\n', 1.81779);
-fprintf('  Regulation time (3): %.5f\n', 2.10758);
+fprintf('  Regulation time (1): %.5f\n', 1.94279);
+fprintf('  Regulation time (2): %.5f\n', 1.98433);
+fprintf('  Regulation time (3): %.5f\n', 2.09972);
