@@ -1,4 +1,4 @@
-# Mamdani Fuzzy Logic Controller
+# Takagi-Sugeno Fuzzy Logic Controller
 
 ## Table of Contests
 
@@ -23,15 +23,17 @@ This section is dedicated to the creation and iterative tuning of the MISO Takag
    load('data.mat');
 
 ## File Decriptions
-Files (`PendulumControl_Takagi_Sugeno_ver1.m` & `PendulumControl_Takagi_Sugeno_ver2.m`) are main executive. It will create two versions of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations.
+`PendulumControl_Takagi_Sugeno_ver1.m` & `PendulumControl_Takagi_Sugeno_ver2.m` will create two versions of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations.
 
-File `ReactionPendulum_Simulation_Model.slx` is a prepared simulink model which generates simulation and results into workspace.
+`ReactionPendulum_Simulation_Model.slx` is a prepared simulink model which generates simulation and results into workspace.
 
-Data `exp_data_RP.mat` is data which is required to supplement all model elements of Reaction Pendulum.
+`exp_data_RP.mat` is data which is required to supplement all model elements of Reaction Pendulum.
 
-Data (`firstFuzzy.mat` & `secondFuzzy.mat`) are saved executions of every created version of Fuzzy.
+`firstFuzzy.mat` & `secondFuzzy.mat` are saved executions of every created version of Fuzzy.
 
-Data (`repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat`) are saved disturbance conditions that the latest version of Fuzzy was tested on.
+`repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat` are saved disturbance conditions that the latest version of Fuzzy was tested on.
+
+`Integer_indicator.m` is a file that calculates quality indicators after properly loading data (disturbances.mat in this case are `repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat`).
 
 ## Results
 Results are stored in [TakagiSugenoFuzzyLogic_for_ReactionPendulum.pdf](doc/TakagiSugenoFuzzyLogic_for_ReactionPendulum.pdf) file.
