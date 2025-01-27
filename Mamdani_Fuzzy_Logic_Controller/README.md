@@ -24,22 +24,22 @@ This section is dedicated to the creation and iterative tuning of the MISO Mamda
 
 ## File Decriptions
 ### Scripts:
-- [PendulumControl_Mamdani_ver1.m](/PendulumControl_Mamdani_ver1.m) first version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
-- [PendulumControl_Mamdani_ver2.m](/PendulumControl_Mamdani_ver2.m) second version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
-- [PendulumControl_Mamdani_ver3.m](/PendulumControl_Mamdani_ver3.m) third version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
-- [Integer_indicator.m](/Integer_indicator.m) is a file that calculates quality indicators after properly loading data disturbances (in this case are `repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat`)
+- [PendulumControl_Mamdani_ver1.m](main/PendulumControl_Mamdani_ver1.m) first version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
+- [PendulumControl_Mamdani_ver2.m](main/PendulumControl_Mamdani_ver2.m) second version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
+- [PendulumControl_Mamdani_ver3.m](main/PendulumControl_Mamdani_ver3.m) third version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
+- [Integer_indicator.m](main/Integer_indicator.m) is a file that calculates quality indicators after properly loading data disturbances (in this case are `repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat`)
 
 ### Data:
-- [exp_data_RP.mat](/exp_data_RP.mat) is data which is required to supplement all model elements of Reaction Pendulum
-- [firstFuzzy.mat](/firstFuzzy.mat) is saved execution of first version of Fuzzy
-- [secondFuzzy.mat](/secondFuzzy.mat) is saved execution of second version of Fuzzy
-- [thirdFuzzy.mat](/thirdFuzzy.mat) is saved execution of third version of Fuzzy
-- [repeating_sequence_02.mat](/repeating_sequence_02.mat) is first disturbance data executed on [PendulumControl_Mamdani_ver3.m](/PendulumControl_Mamdani_ver3.m) version of Fuzzy
-- [repeating_sequence_02_length15mm.mat](/repeating_sequence_02_length15mm.mat) is second disturbance data executed on [PendulumControl_Mamdani_ver3.m](/PendulumControl_Mamdani_ver3.m) version of Fuzzy
-- [repeating_sequence_02_dcvel100.mat](/repeating_sequence_02_dcvel100.mat) is third disturbance data executed on [PendulumControl_Mamdani_ver3.m](/PendulumControl_Mamdani_ver3.m) version of Fuzzy
+- [exp_data_RP.mat](main/exp_data_RP.mat) is data which is required to supplement all model elements of Reaction Pendulum
+- [firstFuzzy.mat](main/firstFuzzy.mat) is saved execution of first version of Fuzzy
+- [secondFuzzy.mat](main/secondFuzzy.mat) is saved execution of second version of Fuzzy
+- [thirdFuzzy.mat](main/thirdFuzzy.mat) is saved execution of third version of Fuzzy
+- [repeating_sequence_02.mat](main/repeating_sequence_02.mat) is first disturbance data executed on [PendulumControl_Mamdani_ver3.m](main/PendulumControl_Mamdani_ver3.m) version of Fuzzy
+- [repeating_sequence_02_length15mm.mat](main/repeating_sequence_02_length15mm.mat) is second disturbance data executed on [PendulumControl_Mamdani_ver3.m](main/PendulumControl_Mamdani_ver3.m) version of Fuzzy
+- [repeating_sequence_02_dcvel100.mat](main/repeating_sequence_02_dcvel100.mat) is third disturbance data executed on [PendulumControl_Mamdani_ver3.m](main/PendulumControl_Mamdani_ver3.m) version of Fuzzy
 
 ### Model:
-- [ReactionPendulum_Simulation_Model.slx](/ReactionPendulum_Simulation_Model.slx) is a prepared simulink model which generates simulation and results into workspace.
+- [ReactionPendulum_Simulation_Model.slx](main/ReactionPendulum_Simulation_Model.slx) is a prepared simulink model which generates simulation and results into workspace.
 
 ## Results
 Results are stored in [MamdaniFuzzyLogic_for_ReactionPendulum.pdf](doc/MamdaniFuzzyLogic_for_ReactionPendulum.pdf) file.
