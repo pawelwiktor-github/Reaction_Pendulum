@@ -1,4 +1,4 @@
-# Takagi-Sugeno Fuzzy Logic Controller
+# Neural Network as a Friction Coefficient Model
 
 ## Table of Contests
 
@@ -8,36 +8,35 @@
 4. [Results](#results)
 
 ## General Description
-This section is dedicated to the creation and iterative tuning of the MISO Takagi-Sugeno-Type Fuzzy Logic Controller. This instruction consists of file decsriptions, usage instructions and results.
+This section is dedicated to the creation and experimental based optimization of Neural Network as a Friction Coefficient Model. This instruction consists of file decsriptions, usage instructions and results.
 
 ## Usage Instructions
 1. **Prerequisites**:
-   - MATLAB 2024b+ or any tool capable of reading (`.m`, `.mat`, `.slx`) files is required. Additionaly Simulink and FuzzyLogicDesigner extensions are obligatory.
+   - MATLAB 2024b+ or any tool capable of reading (`.m`, `.mat`) files is required. 
 
 2. **Execution**:
-   - One Fuzzy Creation version can be performed at the time.
-   - Open simultaneously one version from (`PendulumControl_Takagi_Sugeno_ver1.m` & `PendulumControl_Takagi_Sugeno_ver2.m`) and `ReactionPendulum_Simulation_Model.slx` which generates results.
-   - Data stored in (`firstFuzzy.mat` & `secondFuzzy.mat`) stands for simulation of previously mentioned versions of Fuzzy. It can be loaded and used for printing results.
+   - One version of activation function for NN can be performed at the time.
+   - Open simultaneously one version from (`friction_coeff_ReLu.m`, `friction_coeff_sigmoid.m` & `friction_coeff_tanh.m`) for chosing best activation function for your dataset.
+   - Once the best activation function is chosen, open `friction_coeff_optimization_algorithm.m` to chose best optimization algorithm from described inside the .m file.
+   - Data stored in (`pendulum_swing_45deg_left.mat`, `pendulum_swing_45deg_right.mat`, `pendulum_swing_90deg_left.mat`, `pendulum_swing_90deg_right.mat`) stands for prepared four complete datasets from Reaction Pendulum real object in laboratory which cover almost all of possible behaviour cases for experiments.
    - To load the `data.mat` file into MATLAB, use the following command:
    ```matlab
    load('data.mat');
 
 ## File Decriptions
 ### Scripts:
-- [PendulumControl_Takagi_Sugeno_ver1.m](main/PendulumControl_Takagi_Sugeno_ver1.m) first version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
-- [PendulumControl_Takagi_Sugeno_ver2.m](main/PendulumControl_Takagi_Sugeno_ver2.m) second version of Fuzzy Logic Controller with data aquisition from simulink model as well as visualizations
-- [Integer_indicator.m](main/Integer_indicator.m) is a file that calculates quality indicators after properly loading data disturbances (in this case are `repeating_sequence_02.mat`, `repeating_sequence_02_length15mm.mat` & `repeating_sequence_02_dcvel100.mat`)
+- [friction_coeff_sigmoid.m](main/friction_coeff_sigmoid.m) is prepared script for testing Sigmoid activation function for Reaction Pendulum mathematical model
+- [friction_coeff_tanh.m](main/friction_coeff_tanh.m) is prepared script for testing Hyperbolic Tangent activation function for Reaction Pendulum mathematical model
+- [friction_coeff_ReLu.m](main/friction_coeff_ReLu.m) is prepared script for testing Rectified Linear Unit activation function for Reaction Pendulum mathematical model
+- [friction_coeff_optimization_algorithm.m](main/friction_coeff_optimization_algorithm.m) is prepared script for testing best optimization algorithm for chosen activation function
+
+Detailed description of activation functions and optimization algorithms is presented in [NNFrictionCoeffModel.pdf](doc/NNFrictionCoeffModel.pdf).
 
 ### Data:
-- [exp_data_RP.mat](main/exp_data_RP.mat) is data which is required to supplement all model elements of Reaction Pendulum
-- [firstFuzzy.mat](main/firstFuzzy.mat) is saved execution of first version of Fuzzy
-- [secondFuzzy.mat](main/secondFuzzy.mat) is saved execution of second version of Fuzzy
-- [repeating_sequence_02.mat](main/repeating_sequence_02.mat) is first disturbance data executed on [PendulumControl_Takagi_Sugeno_ver2.m](main/PendulumControl_Takagi_Sugeno_ver2.m) version of Fuzzy
-- [repeating_sequence_02_length15mm.mat](main/repeating_sequence_02_length15mm.mat) is second disturbance data executed on [PendulumControl_Takagi_Sugeno_ver2.m](main/PendulumControl_Takagi_Sugeno_ver2.m) version of Fuzzy
-- [repeating_sequence_02_dcvel100.mat](main/repeating_sequence_02_dcvel100.mat) is third disturbance data executed on [PendulumControl_Takagi_Sugeno_ver2.m](main/PendulumControl_Takagi_Sugeno_ver2.m) version of Fuzzy
-
-### Model:
-- [ReactionPendulum_Simulation_Model.slx](main/ReactionPendulum_Simulation_Model.slx) is a prepared simulink model which generates simulation and results into workspace.
+- [pendulum_swing_45deg_left.mat](main/pendulum_swing_45deg_left.mat) Reaction Pendulum data for angle deflection by 45 [°] in left direction from equilibrium point
+- [pendulum_swing_45deg_right.mat](main/pendulum_swing_45deg_right.mat) Reaction Pendulum data for angle deflection by 45 [°] in right direction from equilibrium point
+- [pendulum_swing_90deg_left.mat](main/pendulum_swing_90deg_left.mat) Reaction Pendulum data for angle deflection by 90 [°] in left direction from equilibrium point
+- [pendulum_swing_90deg_right.mat](main/pendulum_swing_90deg_right.mat) Reaction Pendulum data for angle deflection by 90 [°] in right direction from equilibrium point
 
 ## Results
-Results are stored in [TakagiSugenoFuzzyLogic_for_ReactionPendulum.pdf](doc/TakagiSugenoFuzzyLogic_for_ReactionPendulum.pdf) file.
+Results are stored in [NNFrictionCoeffModel.pdf](doc/NNFrictionCoeffModel.pdf) file.
